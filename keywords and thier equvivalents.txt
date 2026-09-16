@@ -1,0 +1,28 @@
+            keyword 					equivalent
+
+
+1. out 					print
+
+2.Let 					variable assignment
+
+3.same					const assignment
+
+4.fun    				function declaration
+
+5.if					if
+
+6.else 					else
+
+7.elf 					else if
+
+8.give 					return
+
+9.in 					for in tuple
+
+10.while				while
+
+11.from , to , by 			for start to end by steps
+
+12. ask					input
+
+13.

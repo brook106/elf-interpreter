@@ -1,0 +1,94 @@
+--------------------------------NOX'S grammar in BNF--------------------------------------
+
+<program> ::= <statements>*
+
+
+<statement> ::= <variable_decl>
+              | <constant_decl>
+              | <function_decl>
+              | <if_stmt>
+              | <while_stmt>
+              | <repeat_stmt>
+              | <range_loop>
+              | <list_loop>
+              | <out_stmt>
+              | <give_stmt>
+              | <assignment>
+              | <expression>
+
+<identifier> ::= [a-zA-Z_][a-zA-Z0-9_]*
+
+<int> ::= [0-9]+
+
+<float> ::= [0-9]+ "." [0-9]+
+
+<string> ::= '"' [^"]* '"'
+           | "'" [^']* "'"
+
+<bool> ::= "TRUE"| "FALSE"
+
+<expression> ::=<int>
+                   | <float>
+                   | <string>
+                   | <bool>
+                   | <identifier>
+                   | <expression> "+" <expression>
+                   | <expression> "-" <expression>
+                   | <expression> "*" <expression>
+                   | <expression> "/" <expression>
+                   | <expression> "%" <expression>
+                   | <expression> "==" <expression>
+                   | <expression> "!=" <expression>
+                   | <expression> ">" <expression>
+                   | <expression> "<" <expression>
+                   | <expression> ">=" <expression>
+                   | <expression> "<=" <expression>
+                   | <expression> "and" <expression>
+                   | <expression> "or" <expression>
+                   | "not" <expression>
+                   | "-" <expression>
+                   | "(" <expression> ")"
+                   | <function_call>
+                   | <in_expr>
+
+
+<variable_decl>  ::= "let" <identifier> "=" <expression>
+
+<constant_decl>  ::= "same" <identifier> "=" <expression>
+
+<in_expr>        ::= "in" "(" <string> ")"
+
+<out_stmt>       ::= "out" "(" <expression> ")"
+
+<assignment>     ::= <identifier> "=" <expression>
+
+INDENT           ::= increased whitespace level
+
+DEDENT           ::= decreased whitespace level
+
+NEWLINE          ::= "\n"
+
+<block>          ::= NEWLINE INDENT <statement>+ DEDENT
+
+<function_decl>  ::= "fun" <identifier> "(" <params>? ")" ":" <block>
+
+<params>         ::= <identifier> ("," <identifier>)*
+
+<give_stmt>      ::= "give" <expression>
+
+<function_call>  ::= <identifier> "(" <args>? ")"
+
+<args>           ::= <expression> ("," <expression>)*
+
+<if_stmt>        ::= "if" <expression> ":" <block>
+                     ("elf" <expression> ":" <block>)*
+                     ("else" ":" <block>)?
+
+<while_stmt>     ::= "while" <expression> ":" <block>
+
+<repeat_stmt>    ::= "repeat" <expression> ":" <block>
+
+<range_loop>     ::= <identifier> "from" <expression> "to" <expression>
+                     ("by" <expression>)? ":" <block>
+
+<list_loop>      ::= <identifier> "in" <expression> ":" <block>
