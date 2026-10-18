@@ -1,0 +1,27 @@
+out("--- NOX demo ---")
+same rate = 2.5
+let qty = 4
+out(rate * qty)
+let n = 7
+if n % 2 == 0:
+    out("even")
+elf n > 5:
+    out("odd and big")
+else:
+    out("odd and small")
+i from 1 to 6:
+    out(i * i)
+let count = 3
+while count > 0:
+    out(count)
+    count = count - 1
+fun fact(n):
+    if n <= 1:
+        give 1
+    give n * fact(n - 1)
+out(fact(5))
+fun greet(name):
+    out("Hello " + name)
+greet("NOX")
+ch in "hey":
+    out(ch)
