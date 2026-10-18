@@ -3,12 +3,12 @@ from lexer import Lexer
 from parser import Parser
 from evaluator import Evaluator
 
+evaluator = Evaluator()
 def run(source):
     lexer = Lexer(source)
     tokens = lexer.tokenize()
     parser = Parser(tokens)
     ast = parser.parse()
-    evaluator = Evaluator()
     evaluator.evaluate(ast)
 
 def run_file(path):
