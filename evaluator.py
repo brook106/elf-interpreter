@@ -1,4 +1,7 @@
 from nox_ast import *
+class ReturnSignal(Exception):
+    def __init__(self, value):
+        self.value = value
 class Environment :
     def __init__(self,parent = None):
         self.store = {}
@@ -122,12 +125,16 @@ class Evaluator:
             for param, arg in zip(func.params, args):
                 self.environment.set(param, arg)
             result = None
-            for stmt in func.body :
-                result = self.evaluate(stmt)
-            self.environment = old_envi
+            try:
+                for stmt in func.body:
+                    self.evaluate(stmt)
+            except ReturnSignal as r:
+                result = r.value
+            finally:
+                self.environment = old_envi
             return result
         elif isinstance(node, Returnstmt):
-            return self.evaluate(node.value)
+            raise ReturnSignal(self.evaluate(node.value))
         elif isinstance(node, Askexpr):
             prompt = self.evaluate(node.value)
             user_input = input(prompt)
